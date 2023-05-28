@@ -4,7 +4,6 @@ import path from 'path';
 async function get_command_module(command) {
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
     const extensions = ['js', 'mjs'];
-    // check if command exists
     let command_path = '';
     for (const extension of extensions) {
         command_path = path.join(__dirname, 'commands', command + '.' + extension);
@@ -21,23 +20,19 @@ async function get_command_module(command) {
 }
 
 function get_config(project_dir) {
-    // get config file path
     const config_path = path.join(project_dir, 'config.json');
 
-    // check if config file exists
     if (!fs.existsSync(config_path)) {
         console.log('Config file not found.');
         process.exit(1);
     }
 
-    // read config file
     const config = JSON.parse(fs.readFileSync(config_path, 'utf8'));
 
     return config;
 }
 
 function get_files(project_dir) {
-    // get all files recursively from project directory
     const files = []
     const get_files = function (dir) {
         const dir_files = fs.readdirSync(dir);
