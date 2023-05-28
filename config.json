@@ -1,0 +1,13 @@
+{
+    "build": {
+        "output_dir": "build",
+        "exclude": [
+            "bin",
+            "build",
+            "node_modules",
+            "*.json",
+            "*.md",
+            "assets"
+        ]
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "main_description": "Hello ! I am Ulysse ARNAUD.",
+    "description": "",
+    "age": "24",
+    "address": "Paris, France",
+    "status": "Available to hire",
+    "services": [
+        [
+            [
+                "logo",
+                "name",
+                "description"
+            ],
+            [
+                "",
+                "Web Development",
+                "Websites, applications, APIS, games, libraries"
+            ],
+            [
+                "",
+                "Scraping",
+                "Data scraping, web scraping, screen scraping"
+            ],
+            [
+                "",
+                "Cloud Computing",
+                "AWS"
+            ],
+            [
+                "",
+                "CI/CD",
+                "Jenkins, Gitlab CI, Github Actions"
+            ]
+        ]
+    ]
+}

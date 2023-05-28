@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en"
+    class="--color-primary-[#232de2] --color-primary-light-[#6676ef] --color-secondary-[#1c3599] --color-secondary-light-[#1c3599] --color-alt-[#1c3599] --color-dark-[#242c3c] --color-light-[#f0f0f0] --color-red-[#e23d2d] --color-green-[#2de23d] --color-primary-rgb-[35,45,226] --color-primary-light-rgb-[102,118,239] --color-secondary-rgb-[28,53,153] --color-secondary-light-rgb-[28,53,153] --color-alt-rgb-[28,53,153] --color-dark-rgb-[36,44,60] --color-light-rgb-[240,240,240] --color-red-rgb-[226,61,45] --color-green-rgb-[45,226,61] [current,body,ul,h1,h2,h3,h4,p,figure]:{margin-[0] padding-[0]}
+    [html,body,section,header,aside,article,figure,div]:{box-sizing-[border-box]}
+    [ul]:{list-style-[none]}
+    [a]:{text-decoration-[none] color-[inherit]}"
+    aria-busy="true">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Ulysse ARNAUD - Portfolio" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+    <!-- cijih import -->
+    <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@master/main.js"></script>
+    <style>
+        [hidden],
+        html[aria-busy="true"] {
+            display: none !important;
+        }
+
+        /* TODO : Add media queries to CIJIH library */
+        @media screen and (max-width: 1000px) {
+            body > main > section > section > section:nth-child(2) > section > section {
+                grid-template-columns: 1fr!important;
+            }
+            body > main > section > section > section:nth-child(2) > section > section > div {
+                display: none!important;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menu_links = Array.from(
+                document.querySelectorAll("main > section > nav > ul > li > a")
+            );
+            const sections = Array.from(
+                document.querySelectorAll("main > section > section > section")
+            );
+            const initialized = {
+                works: false,
+                experiences: false,
+                resume: false,
+                about: false,
+                profile: false,
+            };
+
+            for (const i in menu_links) {
+                const link = menu_links[i];
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const section = sections[i];
+                    section.parentElement.className += " [> section]:{display-[none]}";
+                    section.className += " display-[grid]";
+
+                    const current = e.target.closest('ul').querySelector('[aria-current="true"]');
+                    if (current) {
+                        current.className += ' [> a > span:last-of-type]:{text-decoration-[none]}';
+                        current.removeAttribute("aria-current");
+                    }
+                    const element = e.target.tagName.toLowerCase() === "li" ? e.target : e.target.closest("li");
+                    element.className += ' [> a > span:last-of-type]:{text-decoration-[underline]}';
+                    element.setAttribute("aria-current", "true");
+
+                    if ("works" === section.dataset.name) {
+                        if (initialized.works) return;
+                        initialized.works = true;
+                        const works = get_works();
+                        const { works: works_list, categories } = works;
+
+                        add_category(0, "All", true);
+                        for (const i in categories) {
+                            const category = categories[i];
+                            add_category(i + 1, category);
+                        }
+
+                        for (const i in works_list) {
+                            const work = works_list[i];
+                            add_work(work);
+                        }
+
+                        const header = section.querySelector(
+                            "section > header > nav > ul"
+                        );
+                        header.className += ` grid-template-columns-[repeat(${header.childElementCount},auto)] [> li > a]:{color-[inherit] text-decoration-[none]}`;
+
+                        const articles = header.closest("header").nextElementSibling;
+                        articles.className += ` [> a]:{cursor-[pointer] aspect-ratio-[1/1] width-[minmax(300px,1fr)] border-radius-[.5rem] overflow-[hidden] background-[var(--color-dark)] position-[relative] box-shadow-[0 8px 32px 0 #0003] color-[inherit] text-decoration-[none]}
+                    [mouseenter]:[> a]:{--hover-[1]}
+                    [mouseleave]:[> a]:{--hover-[0]}
+                    [> a > figure]:{width-[100%] height-[auto] overflow-[hidden]}
+                    [> a > figure > picture]:{width-[100%] height-[auto] display-[block]}
+                    [> a > figure > picture > img]:{object-fit-[cover] object-position-[center] width-[100%] height-[auto] pointer-events-[none]}
+                    [> a > header]:{box-sizing-[border-box] padding-[.5rem .6rem] display-[grid] place-content-[start] row-gap-[.5rem] position-[absolute] bottom-[0] background-[rgba(var(--color-dark-rgb),.9)] transition-[all .3s ease-in-out] width-[100%] height-[100%] transform-[translateY(calc(100% - 3rem - (100% - 3rem) * var(--hover)))] font-size-[80%]}`;
+
+                        function add_category(index, name, active = false) {
+                            const nav = section.querySelector("nav");
+                            const ul = nav.querySelector("ul");
+                            const li = document.createElement("li");
+                            const a = document.createElement("a");
+                            a.href = "javascript:void(0)";
+                            a.textContent = name;
+                            li.appendChild(a);
+                            li.addEventListener("click", function (e) {
+                                e.preventDefault();
+                                const articles = section.querySelector(
+                                    "section > section > section > section > section"
+                                );
+                                const index =
+                                    Array.from(li.parentNode.children).splice(1).indexOf(this) +
+                                    1;
+                                for (const article of articles.children) {
+                                    const article_category = +article.dataset.category;
+                                    if (0 === index) {
+                                        article.className += " display-[grid]";
+                                    } else if (article_category !== index) {
+                                        article.className += " display-[none]";
+                                    } else {
+                                        article.className += " display-[grid]";
+                                    }
+                                }
+                                const current = e.target.closest('ul').querySelector('[aria-current="true"]');
+                                if (current) {
+                                    current.className += ' text-decoration-[none]';
+                                    current.removeAttribute("aria-current");
+                                }
+                                const element = e.target.tagName.toLowerCase() === "li" ? e.target : e.target.closest("li");
+                                element.className += ' text-decoration-[underline]';
+                                element.setAttribute("aria-current", "true");
+                            });
+                            ul.appendChild(li);
+                            if (active) {
+                                li.click();
+                            }
+                        }
+
+                        function add_work(work) {
+                            const section = document.querySelector(
+                                'section[data-name="works"]'
+                            );
+                            const template = document.querySelector("template#work");
+                            const articles = section.querySelector("section > section");
+                            const article = template.content.cloneNode(true);
+                            const figure = article.querySelector("figure");
+                            const picture = figure.querySelector("picture");
+                            const img = document.createElement("img");
+                            img.src = work.cover || "https://via.placeholder.com/300x300";
+                            img.alt = work.name;
+                            img.loading = "lazy";
+
+                            const header = article.querySelector("header");
+                            const h3 = header.querySelector("h3");
+                            const span = header.querySelector("span");
+                            h3.textContent = work.name;
+                            span.textContent = work.description;
+                            picture.appendChild(img);
+
+                            const link = article.querySelector("a");
+                            link.href = work.link;
+
+                            link.dataset.category = +work.category + 1;
+
+                            template.parentNode.appendChild(article.firstElementChild);
+                        }
+                    }
+
+                    if ("resume" === section.dataset.name) {
+                        if (initialized.resume) return;
+                        initialized.resume = true;
+                        const resume = import_json("data/resume");
+                        const { icons, educations, experiences, skills } = resume;
+                        
+                        const templates = {};
+                        for (const template of section.querySelectorAll("template")) {
+                            templates[template.id] = template;
+                        }
+                        
+                        const subsections = {};
+                        const elements = section.querySelectorAll("section > header");
+                        for (const element of elements) {
+                            const header = element.querySelector("h2, h3, h4, h5, h6");
+                            const key = header.textContent.toLowerCase();
+                            subsections[key] = element.closest("section");
+                        }
+
+                        // languages
+                        const languages_articles = subsections?.languages.querySelector("section");
+                        for (const language of skills.languages.slice(1)) {
+                            const article = templates.language.content.cloneNode(true);
+                            const elements = {
+                                logo: article.querySelector("picture"),
+                                name: article.querySelector("h4"),
+                                level: article.querySelector("p"),
+                            };
+                            const [logo, name, level] = language;
+                            const img = document.createElement("img");
+                            img.src = logo;
+                            img.alt = name;
+                            img.loading = "lazy";
+                            img.className += ' height-[100%] width-[100%] object-fit-[contain] object-position-[center]';
+                            elements.logo.appendChild(img);
+                            elements.name.textContent = name;
+                            elements.level.textContent = level;
+                            languages_articles.appendChild(article.firstElementChild);
+                        }
+
+                        // tools
+                        const tools_articles = subsections?.tools.querySelector("section");
+                        for (const tool of skills.tools.slice(1)) {
+                            const article = templates.tool.content.cloneNode(true);
+                            const title = article.querySelector("h4");
+                            const picture = article.querySelector("picture");
+                            const img = document.createElement("img");
+                            const [logo, name] = tool;
+                            img.src = logo;
+                            img.alt = name;
+                            img.loading = "lazy";
+                            img.className += ' height-[100%] width-[100%] object-fit-[contain] object-position-[center]';
+                            picture.appendChild(img);
+                            title.textContent = name;
+                            tools_articles.appendChild(article.firstElementChild);
+                        }
+
+                        // frameworks
+                        const frameworks_articles = subsections?.frameworks.querySelector("section");
+                        for (const framework of skills.frameworks.slice(1)) {
+                            const article = templates.framework.content.cloneNode(true);
+                            const title = article.querySelector("h4");
+                            const picture = article.querySelector("picture");
+                            const img = document.createElement("img");
+                            const [logo, name] = framework;
+                            img.src = logo;
+                            img.alt = name;
+                            img.loading = "lazy";
+                            img.className += ' height-[100%] width-[100%] object-fit-[contain] object-position-[center]';
+                            picture.appendChild(img);
+                            title.textContent = name;
+                            frameworks_articles.appendChild(article.firstElementChild);
+                        }
+
+                        // programming languages
+                        const programming_languages_articles = subsections["programming languages"]?.querySelector("section");
+                        for (const programming_language of skills['programming-languages'].slice(1)) {
+                            const article = templates['programming-language'].content.cloneNode(true);
+                            const img = document.createElement("img");
+                            const elements = {
+                                logo: article.querySelector("picture"),
+                                name: article.querySelector("h4"),
+                                description: article.querySelector("p"),
+                            };
+                            const [logo, name, description] = programming_language;
+                            img.src = logo;
+                            img.alt = name;
+                            img.loading = "lazy";
+                            img.className += ' height-[80%] width-[80%] object-fit-[contain] object-position-[center]';
+                            elements.logo.appendChild(img);
+                            elements.name.textContent = name;
+                            elements.description.textContent = description;
+                            programming_languages_articles.appendChild(article.firstElementChild);
+                        }
+
+                        // experience
+                        const experience_articles = subsections?.experience.querySelector("section");
+                        for (const experience of resume.experiences.slice(1)) {
+                            const article = templates.experience.content.cloneNode(true);
+                            let [
+                                role,
+                                company,
+                                logo,
+                                location,
+                                start_date,
+                                end_date,
+                                description
+                            ] = experience;
+                            const elements = {
+                                role: article.querySelector("h4 > span:last-child"),
+                                company: article.querySelector("h4 > span:first-child"),
+                                logo: article.querySelector("picture"),
+                                location: article.querySelector("header > span"),
+                                start_date: article.querySelector("header > div > span:first-child"),
+                                end_date: article.querySelector("header > div > span:last-child"),
+                                description: article.querySelector("p")
+                            };
+                            if (start_date.length === 7) {
+                                start_date = start_date.split("-").reverse().join("/");
+                            }
+                            if (end_date.length === 7) {
+                                end_date = end_date.split("-").reverse().join("/");
+                            }
+                            elements.role.textContent = role;
+                            elements.company.textContent = company;
+                            const img = document.createElement("img");
+                            img.src = logo;
+                            img.alt = "";
+                            img.loading = "lazy";
+                            img.className += ' height-[100%] width-[100%] object-fit-[contain] object-position-[center right]';
+                            elements.logo.appendChild(img);
+                            elements.location.textContent = location;
+                            elements.start_date.textContent = start_date;
+                            elements.end_date.textContent = end_date;
+                            elements.description.textContent = description;
+                            experience_articles.appendChild(article.firstElementChild);
+                        }
+                        
+                        // education
+                        const education_articles = subsections?.education.querySelector("section");
+                        for (const education of resume.educations.slice(1)) {
+                            const article = templates.education.content.cloneNode(true);
+                            let [
+                                name,
+                                school,
+                                logo,
+                                location,
+                                start_date,
+                                end_date,
+                                description
+                            ] = education;
+                            const elements = {
+                                name: article.querySelector("h4 > span:last-child"),
+                                school: article.querySelector("h4 > span:first-child"),
+                                logo: article.querySelector("picture"),
+                                location: article.querySelector("header > span"),
+                                start_date: article.querySelector("header > div > span:first-child"),
+                                end_date: article.querySelector("header > div > span:last-child"),
+                                description: article.querySelector("p")
+                            };
+                            if (start_date.length === 7) {
+                                start_date = start_date.split("-").reverse().join("/");
+                            }
+                            if (end_date.length === 7) {
+                                end_date = end_date.split("-").reverse().join("/");
+                            }
+                            elements.name.textContent = name;
+                            elements.school.textContent = school;
+                            const img = document.createElement("img");
+                            img.src = logo;
+                            img.alt = school;
+                            img.loading = "lazy";
+                            img.className += ' height-[100%] width-[100%] object-fit-[contain] object-position-[center right]';
+                            elements.logo.appendChild(img);
+                            elements.location.textContent = location;
+                            elements.start_date.textContent = start_date;
+                            elements.end_date.textContent = end_date;
+                            elements.description.textContent = description;
+                            education_articles.appendChild(article.firstElementChild);
+                        }
+                        
+                        // knowledge
+                        const knowledge_list = subsections?.knowledge.querySelector("ul");
+                        for (const knowledge of resume.skills.knowledge) {
+                            const article = templates.knowledge.content.cloneNode(true);
+                            const span = article.querySelector("span");
+                            span.textContent = knowledge;
+                            knowledge_list.appendChild(article.firstElementChild);
+                        }
+
+                        // icons
+                        for (const section_name in icons) {
+                            const section = subsections[section_name];
+                            const icon = icons[section_name];
+                            const picture = section.querySelector("header picture");
+                            const img = document.createElement("img");
+                            img.src = icon;
+                            img.alt = section_name;
+                            img.loading = "lazy";
+                            img.className += ' height-[70%] width-[70%] object-fit-[contain] object-position-[center]';
+                            picture.appendChild(img);
+                        }
+
+                    }
+
+                    if ('about' === section.dataset.name) {
+                        if (initialized.about) return;
+                        initialized.about = true;
+                        const about = import_json('data/about');
+                        const templates = {};
+                        for (const template of section.querySelectorAll("template")) {
+                            templates[template.id] = template;
+                        }
+                        const {
+                            main_description,
+                            description,
+                            age,
+                            address,
+                            status,
+                            services
+                        } = about;
+                        const elements = {
+                            main_description: section.querySelector("section > p > span"),
+                            description: section.querySelector("section > p > span + span"),
+                            age: section.querySelector("section > ul > li:first-child > span:last-child"),
+                            services: section.querySelector("section:nth-child(2) > section > ul"),
+                            status: section.querySelector("section > ul > li:nth-child(3) > span:last-child"),
+                            address: section.querySelector("section > ul > li:nth-child(2) > span:last-child")
+                        };
+                        elements.main_description.textContent = main_description;
+                        elements.description.textContent = description;
+                        elements.age.textContent = age;
+                        elements.address.textContent = address;
+                        elements.status.textContent = status;
+                        let index = -1, max = services.length;
+                        for (const service of services[0].slice(1)) {
+                            const article = templates.service.content.cloneNode(true);
+                            let [logo, name, description] = service;
+                            const _elements = {
+                                logo: article.querySelector("picture"),
+                                name: article.querySelector("h3"),
+                                description: article.querySelector("p")
+                            };
+                            if (_elements.logo) _elements.logo.innerHTML = `<img src="${logo}" alt="${name}" loading="lazy" class="height-[100%] width-[auto] object-fit-[contain] object-position-[center]">`;
+                            _elements.name.textContent = name;
+                            _elements.description.textContent = description;
+                            const div = article.querySelector("div");
+                            if (div && ++index > max) {
+                                div.remove();
+                            }
+                            elements.services.appendChild(article.firstElementChild);
+                        }
+                    }
+                });
+            }
+
+            menu_links[0].click();
+            
+            if (!initialized.profile) {
+                initialized.profile = true;
+                const {avatar,cover,cv,job,socials} = import_json('data/profile');
+                const elements = {
+                    avatar: document.querySelector('main > aside > section > picture '),
+                    cover: document.querySelector('main > aside > figure > picture'),
+                    job: document.querySelector('main > aside > section > section > section > section > p'),
+                    socials: document.querySelector('main > aside > section > section > section > section > ul'),
+                    cv: document.querySelector('main > aside > section > section > section > section > nav > a')
+                };
+                elements.cv.href = cv;
+                elements.job.textContent = job;
+                const template = document.querySelector('template#social-link');
+                for (const social of socials.slice(1)) {
+                    const [name,logo,url] = social;
+                    const article = template.content.cloneNode(true);
+                    const element = article.firstElementChild;
+                    const link = element.querySelector('a');
+                    const picture = element.querySelector('picture');
+                    link.href = url;
+                    const img = document.createElement('img');
+                    img.src = logo;
+                    img.alt = name;
+                    img.loading = 'lazy';
+                    img.className += ' height-[100%] width-[auto] object-fit-[contain] object-position-[center]';
+                    picture.appendChild(img);
+                    elements.socials.appendChild(element);
+                }
+                const img_avatar = document.createElement('img');
+                img_avatar.src = avatar;
+                img_avatar.alt = '';
+                img_avatar.loading = 'lazy';
+                img_avatar.className += ' height-[100%] width-[auto] object-fit-[contain] object-position-[center]';
+                elements.avatar.appendChild(img_avatar);
+                const img_cover = document.createElement('img');
+                img_cover.src = cover;
+                img_cover.alt = '';
+                img_cover.loading = 'lazy';
+                img_cover.className += ' height-[100%] width-[auto] object-fit-[contain] object-position-[center]';
+                elements.cover.appendChild(img_cover);
+            }
+
+            function import_json(path) {
+                path = path + ".json";
+                const request = new XMLHttpRequest();
+                request.open("GET", path, false);
+                request.send(null);
+                return JSON.parse(request.responseText);
+            }
+
+            function get_works() {
+                const works = import_json("data/works");
+                const { works: works_list, categories } = works;
+                const works_object = works_list
+                    .map((work, i) => {
+                        if (i === 0) return;
+                        const work_object = {};
+                        for (const i in work) {
+                            const header = works_list[0][i];
+                            work_object[header] = work[i];
+                        }
+                        return work_object;
+                    })
+                    .filter(Boolean);
+                return { works: works_object, categories };
+            }
+        });
+    </script>
+</head>
+
+<body
+    class="height-[100%] display-[grid] place-content-[center] font-family-[Poppins, sans-serif] background-[var(--color-light)] color-[var(--color-dark)] overflow-[hidden]">
+    <main
+        class="width-[96vw] height-[100vh] display-[grid] place-items-[center] position-[relative] --background-[var(--color-dark)] --color-[var(--color-light)]">
+        <!-- Card -->
+        <aside  
+            class="position-[absolute] background-[var(--background)] color-[var(--color)] height-[90%] width-[35%] left-[8%] z-index-[2] border-radius-[.7rem] display-[grid] grid-template-columns-[1fr] gap-[0] place-content-[start] place-items-[start] overflow-[hidden] grid-template-rows-[auto 1fr] box-shadow-[0 8px 32px 0 #0003] backdrop-filter-[blur( 8px )] -webkit-backdrop-filter-[blur( 8px )] transition-[all .3s ease-in-out] 
+            [> :where(figure,section)]:{width-[100%]}">
+            <figure class="aspect-ratio-[16/11] overflow-[hidden] z-index-[1] background-[lightgrey]">
+                <picture class="width-[100%]">
+                </picture>
+            </figure>
+            <section class="z-index-[2] position-[relative] height-[100%] background-[var(--background)]">
+                <picture
+                    class="position-[absolute] left-[50%] transform-[translate(-50%,-100%)] z-index-[3] overflow-[hidden] clip-path-[circle(50% at 50% 50%)] width-[clamp(2rem, 10vmax, 10rem)] aspect-ratio-[1/1]">
+                </picture>
+                <section class="--gap-[.5rem] z-index-[1] height-[100%]">
+                    <div
+                        class="clip-path-[ellipse(64% 75% at 50% 100%)] user-select-[none] pointer-events-[none] background-[var(--background)] height-[5rem] position-[absolute] left-[0] width-[100%] transform-[translateY(calc(-100% + 1px))]">
+                        &nbsp;
+                    </div>
+                    <section
+                        class="display-[grid] grid-template-rows-[1fr auto] place-items-[start] row-gap-[var(--gap)] z-index-[3] width-[100%] height-[100%]
+                        [> section]:{width-[100%]}">
+                        <section class="padding-[1rem 1rem .1rem] display-[grid] grid-template-columns-[1fr] justify-content-[space-between] place-items-[center] row-gap-[1rem]">
+                            <h1 class="font-size-[min(5vw, 2rem)] text-align-[center]">Ulysse ARNAUD</h1>
+                            <p>Job</p>
+                            <!-- Social links -->
+                            <ul class="
+                            display-[flex] gap-[1rem] --color-[var(--color-primary)] list-style-[none] height-[2rem] width-[100%] justify-content-[center]
+                            ">
+                                <template id="social-link">
+                                    <li class="
+                                    overflow-[hidden] border-radius-[50%] aspect-ratio-[1/1]
+                                    [current, a, picture]:{margin-[0] padding-[0]}
+                                    ">
+                                        <a href="#" target="_blank">
+                                            <picture></picture>
+                                        </a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </section>
+                        <section class="position-[relative]">
+                            <div class="
+                            user-select-[none] pointer-events-[none] height-[1px] width-[100%] background-[linear-gradient(to right, transparent, #FFF6, transparent)] position-[absolute] left-[0] top-[0]
+                            ">&nbsp;</div>
+                            <nav class="
+                            display-[grid] grid-template-columns-[1fr]
+                            [button]:{cursor-[pointer] width-[100%] height-[100%] padding-[1rem] background-[transparent] border-[none] color-[inherit] font-weight-[bold] text-transform-[uppercase] font-size-[100%]}
+                            ">
+                                <a href="https://cv.arnaud.tech">
+                                    <button>Download CV</button>
+                                </a>
+                            </nav>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </aside>
+
+        <!-- Main section and menu -->
+        <section
+            class="z-index-[1] width-[100%] display-[grid] grid-template-columns-[.1fr .75fr 1fr] place-items-[center] height-[80%]">
+            <!-- Menu -->
+            <nav class="display-[grid] grid-template-columns-[1fr] width-[100%]
+            [a]:{cursor-[pointer]}
+            [button]:{width-[100%] height-[100%] padding-[1rem] background-[transparent] border-[none] color-[inherit] font-weight-[bold] text-transform-[uppercase] font-size-[100%]}
+            ">
+                <ul
+                    class="display-[grid] grid-template-columns-[1fr] list-style-[none] place-content-[space-between] gap-[.6rem] width-[100%]
+                    [li]:{aspect-ratio-[1/1] place-content-[center] border-radius-[.6rem] background-[var(--background)] color-[var(--color)] display-[grid] padding-[0] grid-template-columns-[1fr] grid-template-rows-[1fr] overflow-[hidden] box-shadow-[0 8px 32px 0 #0003] backdrop-filter-[blur( 8px )] -webkit-backdrop-filter-[blur( 8px )] transition-[all .3s ease-in-out]}
+                    [a]:{color-[inherit] text-decoration-[none] height-[100%] display-[block] display-[grid] place-content-[center] place-items-[center] text-transform-[uppercase] font-size-[clamp(.1rem,.85vw,2rem)] padding-[0] row-gap-[0] font-weight-[bold]}
+                    [picture]:{width-[clamp(0.2rem,1vw,3rem] height-[auto] display-[block] place-self-[center] place-items-[center] place-content-[center]}
+                    [picture > img]:{width-[100%] height-[auto]}
+                    ">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <picture>
+                                <img src="assets/img/menu-about.svg" alt="About">
+                            </picture>
+                            <span>About</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <picture>
+                                <img src="assets/img/menu-resume.svg" alt="Resume">
+                            </picture>
+                            <span>Resume</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <picture>
+                                <img src="assets/img/menu-works.svg" alt="Works">
+                            </picture>
+                            <span>Works</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <picture>
+                                <img src="assets/img/menu-blog.svg" alt="Blog">
+                            </picture>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <picture>
+                                <img src="assets/img/menu-stats.svg" alt="Stats">
+                            </picture>
+                            <span>Stats</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <picture>
+                                <img src="assets/img/menu-contact.svg" alt="Contact">
+                            </picture>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Column span -->
+            <span class="user-select-[none] pointer-events-[none]"></span>
+
+            <!-- Main section -->
+            <section
+                class="--background-[rgba(var(--color-dark-rgb),.9] overflow-[hidden] background-[var(--background)] color-[var(--color)] width-[100%] height-[100%] position-[relative] border-radius-[.5rem] box-shadow-[0 8px 32px 0 #0003] backdrop-filter-[blur( 8px )] -webkit-backdrop-filter-[blur( 8px )] transition-[all .3s ease-in-out] [> section]:{display-[none] height-[100%] width-[100%] position-[absolute] right-[0] place-content-[start] overflow-[auto] grid-template-columns-[1fr] scrollbar-color-[var(--color) var(--background)] scrollbar-width-[thin]}
+                [> section > section]:{display-[grid] grid-template-rows-[auto 1fr] padding-bottom-[1rem]}
+                [> section > section > header]:{border-bottom-[1px solid #FFF6] padding-[2% 4%]}
+                [> section > section > section]:{display-[grid] row-gap-[1rem] grid-template-columns-[1fr] width-[92%] margin-[auto]}
+                [> section > section > section > section]:{width-[100%]}">
+                <!-- About -->
+                <section data-name="about" class="display-[grid]">
+                    <!-- About me -->
+                    <section>
+                        <header>
+                            <h2>About me</h2>
+                        </header>
+                        <section class="padding-block-[1rem]">
+                            <p class="display-[grid] grid-template-columns-[1fr] row-gap-[.5rem]">
+                                <span class="font-weight-[bold]"></span>
+                                <span></span>
+                            </p>
+                            <ul
+                                class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(16rem,1fr)] row-gap-[.5rem] column-gap-[1rem] list-style-[none] [> li]:{display-[grid] grid-template-columns-[repeat(2,auto)] place-content-[start] column-gap-[1rem]}">
+                                <li>
+                                    <span>Age :</span>
+                                    <span></span>
+                                </li>
+                                <li>
+                                    <span>Address :</span>
+                                    <span></span>
+                                </li>
+                                <li>
+                                    <span>Status :</span>
+                                    <span></span>
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                    <!-- Services -->
+                    <section>
+                        <header>
+                            <h2>Services</h2>
+                        </header>
+                        <section
+                            class="padding-block-[0] position-[relative]
+                            [> div]:{user-select-[none] pointer-events-[none] height-[100%] width-[1px] background-image-[linear-gradient(to bottom, #FFFA, transparent)] position-[absolute] left-[50%] transform-[translateX(-50%)]}">
+                            <!-- <div>&nbsp;</div> -->
+                            <ul
+                                class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(16rem,1fr)] row-gap-[3rem] list-style-[none]">
+                                <template id="service">
+                                    <li class="
+                                        [current,figure,p,span,div,h3]:{margin-[0] padding-[0]}
+                                        display-[grid] row-gap-[.3rem] height-[100%] padding-[1rem 1.5rem] position-[relative]
+                                        [> div]:{user-select-[none] pointer-events-[none] height-[1px] width-[100%] background-image-[linear-gradient(to right, #FFFA, transparent)] position-[absolute] bottom-[0] left-[0] transform-[translateY(50%)]}
+                                        [> figure]:{aspect-ratio-[1/1] border-radius-[50%] overflow-[hidden] height-[5rem] width-[auto] padding-[.5rem] border-[1px solid #FFF5] display-[grid] place-content-[center]}
+                                        [> figure > picture]:{height-[100%] width-[100%] border-radius-[50%] overflow-[hidden] display-[grid] place-items-[center]}
+                                        [> span]:{font-weight-[bold] font-size-[1.2rem]}">
+                                        <h3></h3>
+                                        <p></p>
+                                    </li>
+                                </template>
+                            </ul>
+                        </section>
+                    </section>
+                </section>
+
+                <!-- Resume -->
+                <section data-name="resume">
+                    <!-- Resume -->
+                    <section>
+                        <!-- Header -->
+                        <header>
+                            <h2>Resume</h2>
+                        </header>
+                        <!-- Section -->
+                        <section
+                            class="display-[grid] grid-template-columns-[repeat(2, 1fr] row-gap-[1rem] column-gap-[0rem] position-[relative]
+                            [> div]:{user-select-[none] pointer-events-[none] height-[100%] width-[1px] background-image-[linear-gradient(to bottom, #FFFA, transparent)] position-[absolute] left-[50%] top-[0] transform-[translateX(-50%)]}
+                            [> section]:{position-[relative]}
+                            [> section > header]:{display-[grid] grid-template-columns-[auto 1fr] column-gap-[1rem] align-items-[center] position-[relative] padding-[2% 4%]}
+                            [> section > header > figure]:{aspect-ratio-[1/1] border-radius-[50%] overflow-[hidden] height-[3rem] width-[auto] padding-[10%] border-[1px solid #FFF5]}
+                            [> section > header > figure > picture]:{height-[100%] width-[100%] border-radius-[50%] overflow-[hidden] display-[grid] place-items-[center]}
+                            [> section > header > h3]:{text-transform-[uppercase]}
+                            [> section > header > h3 + div]:{height-[1px] width-[100%] background-image-[linear-gradient(to right, #FFF6, transparent)] width-[100%] user-select-[none] pointer-events-[none] position-[absolute] left-[0] bottom-[0]}
+                            [> section:first-of-type > section]:{padding-inline-end-[1rem]}
+                            [> section:last-of-type > section]:{padding-inline-start-[1rem]}
+                            ">
+                            <!-- Experience -->
+                            <section>
+                                <header>
+                                    <!-- Icon -->
+                                    <figure>
+                                        <picture></picture>
+                                    </figure>
+                                    <h3>Experience</h3>
+                                    <div>&nbsp;</div>
+                                </header>
+                                <!-- Section -->
+                                <section class="[h4]:{display-[grid]}">
+                                    <template id="experience">
+                                        <article class="
+                                        --span-color-[lightgray] padding-block-[1rem]
+                                        [p,picture,h4]:{margin-[0] padding-[0]}
+                                        ">
+                                            <header class="
+                                            display-[grid] grid-template-columns-[1fr .8fr] row-gap-[.5rem] column-gap-[1rem] align-items-[center] position-[relative] padding-block-[.5rem]
+                                            [> div]:{grid-column-[1/3] font-weight-[bold] font-size-[80%] display-[grid] column-gap-[.3rem] grid-template-columns-[1fr auto 1fr] padding-[.3rem .5rem] border-[2px solid var(--span-color)] color-[var(--span-color)] width-[max-content]}
+                                            [> span]:{grid-column-[1/3]}
+                                            [> picture]:{aspect-ratio-[28/9] overflow-[hidden]}
+                                            ">
+                                                <div>
+                                                    <span>MM/YYYY</span>
+                                                    -
+                                                    <span>MM/YYYY</span>
+                                                </div>
+                                                <span>Location</span>
+                                                <h4>
+                                                    <span class="color-[var(--color-primary-light)]">Company</span>,
+                                                    <span>Role</span>
+                                                </h4>
+                                                <picture></picture>
+                                            </header>
+                                            <p>description</p>
+                                        </article>
+                                    </template>
+                                </section>
+                            </section>
+                            <div>&nbsp;</div>
+                            <!-- Education -->
+                            <section>
+                                <!-- Header -->
+                                <header>
+                                    <!-- Icon -->
+                                    <figure>
+                                        <picture></picture>
+                                    </figure>
+                                    <h3>Education</h3>
+                                    <div>&nbsp;</div>
+                                </header>
+                                <!-- Section -->
+                                <section>
+                                    <template id="education">
+                                        <article class="
+                                        --span-color-[lightgray] padding-block-[1rem]
+                                        [p,picture,h4]:{margin-[0] padding-[0]}
+                                        ">
+                                            <header class="
+                                            display-[grid] grid-template-columns-[1fr .8fr] row-gap-[.5rem] column-gap-[1rem] align-items-[center] position-[relative] padding-block-[.5rem]
+                                            [> div]:{grid-column-[1/3] font-weight-[bold] font-size-[80%] display-[grid] column-gap-[.3rem] grid-template-columns-[1fr auto 1fr] padding-[.3rem .5rem] border-[2px solid var(--span-color)] color-[var(--span-color)] width-[max-content]}
+                                            [> span]:{grid-column-[1/3]}
+                                            [> picture]:{aspect-ratio-[28/9] overflow-[hidden]}
+                                            ">
+                                                <div>
+                                                    <span>MM/YYYY</span>
+                                                    -
+                                                    <span>MM/YYYY</span>
+                                                </div>
+                                                <span>Location</span>
+                                                <h4>
+                                                    <span class="color-[var(--color-primary-light)]">School</span>,
+                                                    <span>Name</span>
+                                                </h4>
+                                                <picture></picture>
+                                            </header>
+                                            <p>description</p>
+                                        </article>
+                                    </template>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+
+                    <!-- Skills -->
+                    <section class="
+                        [> section]:{display-[grid] column-gap-[0] padding-block-[0] position-[relative] justify-content-[space-between] font-size-[80%]}
+                        [> section > section]:{position-[relative]}
+                        [> section > div]:{user-select-[none] pointer-events-[none] height-[100%] width-[1px] background-image-[linear-gradient(to bottom, #FFF6, transparent)] position-[absolute] left-[50%] top-[0] transform-[translateX(-50%)]}
+                        [> section header]:{padding-block-[.5rem] padding-inline-[1rem] display-[grid] grid-template-columns-[auto 1fr] column-gap-[1rem] align-items-[center] position-[relative]}
+                        [> section header > figure]:{aspect-ratio-[1/1] border-radius-[50%] overflow-[hidden] height-[3rem] width-[auto] padding-[.25rem] border-[1px solid #FFF5]}
+                        [> section header > figure > picture]:{height-[100%] width-[100%] border-radius-[50%] overflow-[hidden] display-[grid] place-items-[center]}
+                        [> section header > figure > picture > img]:{height-[auto] width-[100%] object-fit-[contain] object-position-[center]}
+                        [> section header > h3]:{text-transform-[uppercase]}
+                        [> section header > h3 + div]:{height-[1px] width-[100%] background-image-[linear-gradient(to right, #FFF6, transparent)] width-[100%] user-select-[none] pointer-events-[none] position-[absolute] left-[0] bottom-[0]}
+                        [> section > section > section > section]:{padding-block-[.64rem] padding-inline-[1rem] display-[grid] grid-template-columns-[repeat(auto-fill, minmax(4rem,1fr)] column-gap-[.8rem] row-gap-[.8rem] place-items-[center] place-content-[center]}
+                        [> section > section > section > article]:{display-[grid] grid-template-columns-[1fr] column-gap-[1rem] place-items-[center] width-[100%]}">
+                        <!-- Header -->
+                        <header>
+                            <h2>Skills</h2>
+                        </header>
+                        <!-- Section -->
+                        <section
+                            class="
+                            grid-template-columns-[repeat(2,1fr)] place-items-[start]
+                            [> section]:{display-[grid] grid-template-columns-[1fr] width-[100%]}
+                            [> section > section]:{display-[grid] grid-template-columns-[1fr] width-[100%]}
+                            [> section > section > header]:{width-[100%]}
+                            [> section > section > section]:{display-[grid] grid-template-columns-[repeat(auto-fill, minmax(4rem, 1fr))] row-gap-[1rem] column-gap-[.3rem] width-[100%]}
+                            ">
+                            <div>&nbsp;</div>
+
+                            <section>
+                            <!-- Languages -->
+                                <section>
+                                    <!-- Header -->
+                                    <header>
+                                        <!-- Icon -->
+                                        <figure>
+                                            <picture></picture>
+                                        </figure>
+                                        <h3>Languages</h3>
+                                        <div>&nbsp;</div>
+                                    </header>
+                                    <!-- Section -->
+                                    <section class="display-[flex] grid-template-columns-[unset] flex-wrap-[wrap] place-content-[space-between]">
+                                        <template id="language">
+                                            <article class="
+                                            display-[grid] row-gap-[0] place-items-[center] grid-template-rows-[1fr auto] height-[100%] overflow-[hidden] width-[clamp(3rem,6vmax,6rem)]
+                                            [header,h4,p,figure,picture]:{padding-[0] margin-[0]}
+                                            [> figure]:{display-[grid] row-gap-[0] place-items-[center] aspect-ratio-[1/1] width-[100%] height-[100%] overflow-[hidden]}
+                                            [> figure > picture]:{width-[inherit] height-[inherit] object-fit-[contain] object-position-[center] user-select-[none] pointer-events-[none]}
+                                            ">
+                                                <figure>
+                                                    <picture></picture>
+                                                </figure>
+                                                <h4>Name</h4>
+                                                <p></p>
+                                            </article>
+                                        </template>
+                                    </section>
+                                </section>
+
+                                <!-- Frameworks -->
+                                <section>
+                                    <!-- Header -->
+                                    <header>
+                                        <!-- Icon -->
+                                        <figure>
+                                            <picture></picture>
+                                        </figure>
+                                        <h3>Frameworks</h3>
+                                        <div>&nbsp;</div>
+                                    </header>
+                                    <!-- Section -->
+                                    <section>
+                                        <template id="framework">
+                                            <article class="
+                                            display-[grid] row-gap-[0] place-items-[center] grid-template-rows-[1fr auto] height-[100%] overflow-[hidden] width-[100%]
+                                            [header,h4,p,figure,picture]:{padding-[0] margin-[0]}
+                                            [> figure]:{display-[grid] row-gap-[0] place-items-[center] aspect-ratio-[1/1] width-[inherit] height-[inherit] overflow-[hidden]}
+                                            [> figure > picture]:{width-[100%] height-[100%] object-fit-[contain] object-position-[center]}
+                                            ">
+                                                <figure>
+                                                    <picture></picture>
+                                                </figure>
+                                                <h4>Name</h4>
+                                            </article>
+                                        </template>
+                                    </section>
+                                </section>
+                            </section>
+
+                            <section>
+                                <!-- Knowledge -->
+                            <section>
+                                <!-- Header -->
+                                <header>
+                                    <!-- Icon -->
+                                    <figure>
+                                        <picture></picture>
+                                    </figure>
+                                    <h3>Knowledge</h3>
+                                    <div>&nbsp;</div>
+                                </header>
+                                <!-- Section -->
+                                <section class="grid-template-columns-[1fr] width-[100%]">
+                                    <ul
+                                        class="width-[100%] display-[grid] grid-template-columns-[repeat(auto-fill, minmax(8rem, 1fr))] gap-[1.2rem]">
+                                        <template id="knowledge">
+                                            <li class="
+                                            display-[grid] grid-template-columns-[auto 1fr] column-gap-[.5rem]
+                                            [> picture]:{width-[1rem] height-[1rem] overflow-[hidden] display-[grid] place-items-[center]}
+                                            [> picture > img]:{height-[auto] width-[100%] object-fit-[contain] object-position-[center]}
+                                            [> span]:{width-[100%] line-height-[1.1]}
+                                            ">
+                                                <picture></picture>
+                                                <span>First Entry</span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </section>
+                            </section>
+
+                            <!-- Tools -->
+                            <section>
+                                <!-- Header -->
+                                <header>
+                                    <!-- Icon -->
+                                    <figure>
+                                        <picture></picture>
+                                    </figure>
+                                    <h3>Tools</h3>
+                                    <div>&nbsp;</div>
+                                </header>
+                                <!-- Section -->
+                                <section>
+                                    <template id="tool">
+                                        <article class="
+                                        display-[grid] row-gap-[0] place-items-[center] grid-template-rows-[1fr auto] height-[100%] overflow-[hidden] width-[100%]
+                                        [header,h4,p,figure,picture]:{padding-[0] margin-[0]}
+                                        [> figure]:{display-[grid] row-gap-[0] place-items-[center] aspect-ratio-[1/1] width-[inherit] height-[100%] overflow-[hidden]}
+                                        [> figure > picture]:{width-[100%] height-[100%] object-fit-[contain] object-position-[center]}
+                                        ">
+                                            <figure>
+                                                <picture></picture>
+                                            </figure>
+                                            <h4>Name</h4>
+                                        </article>
+                                    </template>
+                                </section>
+                            </section>
+                            </section>
+
+                            
+                        </section>
+                        <!-- Programming languages -->
+                        <section>
+                            <!-- Header -->
+                            <header>
+                                <!-- Icon -->
+                                <figure>
+                                    <picture></picture>
+                                </figure>
+                                <h3>Programming languages</h3>
+                                <div>&nbsp;</div>
+                            </header>
+                            <!-- Section -->
+                            <section class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(clamp(7rem,7vmax,10rem), 1fr))] width-[100%]">
+                                <template id="programming-language">
+                                    <article class="
+                                    display-[grid] row-gap-[0] place-items-[center] place-content-[center] grid-template-rows-[1fr 1fr] height-[100%] aspect-ratio-[1/1.6] overflow-[hidden]
+                                    [header,h4,p,figure,picture]:{padding-[0] margin-[0]}
+                                    [> figure]:{display-[grid] row-gap-[0] place-items-[center] aspect-ratio-[1/1] width-[inherit] height-[100%] overflow-[hidden]}
+                                    [> figure > picture]:{width-[100%] height-[inherit] object-fit-[contain] object-position-[center] display-[grid] justify-items-[center] align-items-[start]}
+                                    [> header]:{text-align-[center] display-[grid] row-gap-[.3rem] height-[100%] width-[100%]}
+                                    [> header > p]:{font-size-[100%]}
+                                    ">
+                                        <figure>
+                                            <picture></picture>
+                                        </figure>
+                                        <header>
+                                            <h4>Name</h4>
+                                            <p></p>
+                                        </header>
+                                    </article>
+                                </template>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+
+                <!-- Works -->
+                <section data-name="works">
+                    <section>
+                        <header class="display-[flex] align-items-[center] justify-content-[space-between]  column-gap-[1rem] overflow-[hidden]">
+                            <h2>Works</h2>
+                            <nav class="overflow-[auto]">
+                                <ul class="display-[grid] column-gap-[1rem]"></ul>
+                            </nav>
+                        </header>
+
+                        <section
+                            class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(9rem, 1fr))] place-content-[space-between] column-gap-[1rem] row-gap-[1rem] padding-block-[1rem] font-size-[80%]">
+                            <template id="work">
+                                <a target="_blank" class="[current,figure,h3,picture]:{padding-[0] margin-[0]}">
+                                    <figure>
+                                        <picture></picture>
+                                    </figure>
+                                    <header>
+                                        <h3></h3>
+                                        <span></span>
+                                    </header>
+                                </a>
+                            </template>
+                        </section>
+                    </section>
+                </section>
+
+                <!-- Blog -->
+                <section data-name="blog">
+                    <section>
+                        <header>
+                            <h2>Blog</h2>
+                        </header>
+                        <section class="padding-block-[1rem]">Work in progress</section>
+                    </section>
+                </section>
+
+                <!-- Stats -->
+                <section data-name="stats">
+                    <section>
+                        <header>
+                            <h2>Stats</h2>
+                        </header>
+                        <section class="padding-block-[1rem]">Work in progress</section>
+                    </section>
+                    <section>
+                        <header>
+                            <h2>Liens</h2>
+                        </header>
+                        <section class="padding-block-[1rem]">Work in progress</section>
+                    </section>
+                </section>
+
+                <!-- Contact -->
+                <section data-name="contact">
+                    <section>
+                        <header>
+                            <h2>Contact</h2>
+                        </header>
+                        <section class="padding-block-[1rem]">Work in progress</section>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </main>
+</body>
+
+</html>

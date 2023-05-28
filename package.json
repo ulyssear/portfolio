@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "build": "node ./bin/cli.mjs build",
+    "watch": "npm run build -- --watch",
+    "start": "node ./bin/cli.mjs start"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}

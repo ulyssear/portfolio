@@ -1,0 +1,280 @@
+{
+    "icons": {
+        "experience": "assets/img/icon-experience.svg",
+        "education": "assets/img/icon-education.svg",
+        "knowledge": "assets/img/icon-knowledge.svg",
+        "languages": "assets/img/icon-languages.svg",
+        "frameworks": "assets/img/icon-frameworks.svg",
+        "tools": "assets/img/icon-tools.svg",
+        "programming languages": "assets/img/icon-programming-languages.svg"
+    },
+    "experiences" : [
+        [
+            "role",
+            "company",
+            "logo",
+            "location",
+            "start_date",
+            "end_date",
+            "description"
+        ],
+        [
+            "Cofounder",
+            "Liigem",
+            "assets/img/company-liigem.jpg",
+            "Versailles, France",
+            "2016-09",
+            "2022-09",
+            "Company involved in the creation of applications, websites and apis for companies and private individuals."
+        ],
+        [
+            "Apprentice : Web developer",
+            "Pharmodelgroup",
+            "assets/img/company-pharmodelgroup.png",
+            "Paris, France",
+            "2019-07",
+            "2021-07",
+            "Development of the showcase website of the company and some internal tools."
+        ],
+        [
+            "Apprentice : Web developer",
+            "NZUP",
+            "assets/img/company-nzup.png",
+            "Versailles, France",
+            "2018-04",
+            "2018-06",
+            "Development with Angular and Symfony."
+        ]
+    ],
+    "educations": [
+        [
+            "name",
+            "school",
+            "logo",
+            "location",
+            "start_date",
+            "end_date",
+            "description"
+        ],
+        [
+            "Mastère Cybersécurité & Cloud",
+            "IPSSI",
+            "assets/img/school-ipssi.png",
+            "Paris, France",
+            "2022-11",
+            "2023-11",
+            "Audits, Reverse enginnering, Pentesting, Forensic, Monitoring, AWS"
+        ],
+        [
+            "Mastère Big Data & IA",
+            "IPSSI",
+            "assets/img/school-ipssi.png",
+            "Paris, France",
+            "2021-09",
+            "2022-09",
+            "Machine learning, Deep learning, Data scraping, Data visualisation, AWS"
+        ],
+        [
+            "Mastère Développement Web & Mobile",
+            "IPSSI",
+            "assets/img/school-ipssi.png",
+            "Paris, France",
+            "2019-09",
+            "2021-09",
+            "Web development, Mobile development, CD/CI, Virtualisation, Cloud"
+        ],
+        [
+            "DUT Informatique",
+            "CNAM",
+            "assets/img/school-cnam.jpg",
+            "Paris, France",
+            "2017-09",
+            "2019-09",
+            "Web/Mobile development, Networks, Databases, Project management, Discrete Maths, Cloud"
+        ]
+    ],
+    "skills": {
+        "languages": [
+            [
+                "logo",
+                "name",
+                "level"
+            ],
+            [
+                "assets/img/flag-fr.svg",
+                "French",
+                "Native"
+            ],
+            [
+                "assets/img/flag-gb.svg",
+                "English",
+                "B2"
+            ],
+            [
+                "assets/img/flag-es.svg",
+                "Spanish",
+                "A2"
+            ]
+        ],
+        "frameworks": [
+            [
+                "logo",
+                "name"
+            ],
+            [
+                "assets/img/framework-laravel.svg",
+                "Laravel"
+            ],
+            [
+                "assets/img/framework-symfony.png",
+                "Symfony"
+            ],
+            [
+                "assets/img/framework-angular.svg",
+                "Angular"
+            ],
+            [
+                "assets/img/framework-vue.svg",
+                "VueJS"
+            ],
+            [
+                "assets/img/framework-react.svg",
+                "ReactJS"
+            ],
+            [
+                "assets/img/framework-jquery.png",
+                "Jquery"
+            ],
+            [
+                "assets/img/framework-puppeteer.svg",
+                "Puppeteer"
+            ],
+            [
+                "assets/img/framework-selenium.png",
+                "Selenium"
+            ]
+        ],
+        "tools": [
+            [
+                "logo",
+                "name",
+                "description"
+            ],
+            [
+                "assets/img/tool-nodejs.svg",
+                "NodeJS",
+                "Javascript runtime"
+            ],
+            [
+                "assets/img/tool-git.svg",
+                "Git",
+                "Versioning"
+            ],
+            [
+                "assets/img/tool-docker.svg",
+                "Docker",
+                "Virtualisation & Containerisation"
+            ],
+            [
+                "assets/img/tool-aws.png",
+                "AWS",
+                "Cloud"
+            ],
+            [
+                "assets/img/tool-linux.svg",
+                "Linux",
+                "Alpine for docker, debian and arch"
+            ],
+            [
+                "assets/img/tool-windows.svg",
+                "Windows",
+                "Desktop, Laptop"
+            ],
+            [
+                "assets/img/tool-android.svg",
+                "Android",
+                "Phone"
+            ],
+            [
+                "assets/img/tool-nginx.svg",
+                "Nginx",
+                "Web server"
+            ]
+        ],
+        "programming-languages": [
+            [
+                "logo",
+                "name",
+                "description"
+            ],
+            [
+                "assets/img/prog-javascript.svg",
+                "Javascript",
+                "Apps, websites, bots, libraries"
+            ],
+            [
+                "assets/img/prog-c.png",
+                "C",
+                "Scripting"
+            ],
+            [
+                "assets/img/prog-php.svg",
+                "PHP",
+                "Apps, APIS, websites, libraries"
+            ],
+            [
+                "assets/img/prog-python.svg",
+                "Python",
+                "Scripting, IA, bots, APIS, apps"
+            ],
+            [
+                "assets/img/prog-java.svg",
+                "Java",
+                "Apps"
+            ],
+            [
+                "assets/img/prog-go.svg",
+                "Go",
+                "APIS"
+            ],
+            [
+                "assets/img/prog-html.svg",
+                "HTML/CSS",
+                "Websites"
+            ],
+            [
+                "assets/img/prog-mysql.png",
+                "MySQL",
+                "Databases"
+            ],
+            [
+                "assets/img/prog-mongodb.svg",
+                "MongoDB",
+                "Databases"
+            ],
+            [
+                "assets/img/prog-bash.svg",
+                "Bash",
+                "Scripting"
+            ],
+            [
+                "assets/img/prog-powershell.png",
+                "PowerShell",
+                "Scripting"
+            ],
+            [
+                "assets/img/prog-typescript.svg",
+                "Typescript",
+                "Apps, websites"
+            ]
+        ],
+        "knowledge": [
+            "Responsive & mobile ready",
+            "Fullstack development",
+            "Databases integration",
+            "CD/CI",
+            "Cloud",
+            "Data scraping"
+        ]
+    }
+}

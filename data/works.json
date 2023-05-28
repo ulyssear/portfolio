@@ -1,0 +1,225 @@
+{
+    "categories": [
+        "Websites",
+        "Libraries",
+        "Tools",
+        "Bots",
+        "Games",
+        "Other"
+    ],
+    "works": [
+        [
+            "name", "description", "category", "link", "tags", "cover"
+        ],
+
+        [
+            "ulysse.arnaud.tech",
+            "This portfolio",
+            0,
+            "https://github.com/ulyssear/ulysse.arnaud.tech",
+            [
+                "html",
+                "css",
+                "javascript",
+                "portfolio",
+                "website"
+            ],
+            ""
+        ],
+        [
+            "cv.arnaud.tech",
+            "My CV",
+            0,
+            "https://github.com/ulyssear/cv.arnaud.tech",
+            [
+                "html",
+                "css",
+                "javascript",
+                "cv",
+                "website"
+            ],
+            ""
+        ],
+        [
+            "github-portfolio",
+            "Load a github portfolio in a few seconds",
+            0,
+            "https://github.com/ulyssear/github-portfolio",
+            [
+                "html",
+                "css",
+                "javascript",
+                "portfolio",
+                "website",
+                "github"
+            ],
+            ""
+        ],
+
+        [
+            "css-in-js-in-html",
+            "CSS-in-JS without CSS and JS",
+            1,
+            "https://github.com/ulyssear/css-in-js-in-html",
+            [
+                "css-in-js",
+                "css",
+                "javascript",
+                "html",
+                "nodejs"
+            ],
+            ""
+        ],
+        [
+            "flexible-configurations",
+            "Simple & flexible configurations for javascript",
+            1,
+            "https://github.com/ulyssear/flexible-configurations",
+            [
+                "javascript",
+                "configurations",
+                "nodejs"
+            ],
+            ""
+        ],
+        [
+            "API-Model-Management",
+            "Helper to create quickly an API with PHP",
+            1,
+            "https://github.com/ulyssear/API-Model-Management",
+            [
+                "php",
+                "api",
+                "model",
+                "database",
+                "mysql"
+            ],
+            ""
+        ],
+        [
+            "flexible-collections",
+            "Lightweight & flexible collections for PHP 8",
+            1,
+            "https://github.com/ulyssear/flexible-collections",
+            [
+                "php",
+                "collection",
+                "composer"
+            ],
+            ""
+        ],
+        [
+            "simple-mongoose-schema-helper",
+            "Helper for models creation with mongoose",
+            1,
+            "https://github.com/ulyssear/simple-mongoose-schema-helper",
+            [
+                "javascript",
+                "nodejs",
+                "mongoose",
+                "schema",
+                "helper"
+            ],
+            ""
+        ],
+        [
+            "just-render",
+            "Generate HTMLElement from a string",
+            1,
+            "https://github.com/ulyssear/just-render",
+            [
+                "javascript",
+                "html",
+                "elements",
+                "nodejs"
+            ],
+            ""
+        ],
+
+        [
+            "hex2ascii",
+            "Command line tool to convert hex to ascii",
+            2,
+            "https://github.com/ulyssear/hex2ascii",
+            [
+                "c",
+                "cli",
+                "tool",
+                "hex",
+                "ascii",
+                "converter"
+            ],
+            ""
+        ],
+        [
+            "c-libraries",
+            "C functions to import in your projects",
+            2,
+            "https://github.com/ulyssear/c-libraries",
+            [
+                "c",
+                "library",
+                "functions",
+                "import"
+            ],
+            ""
+        ],
+
+        [
+            "scrap_metacritic",
+            "Bot scraper for metacritic",
+            3,
+            "https://github.com/ulyssear/scrap_metacritic",
+            [
+                "puppeteer",
+                "nodejs",
+                "javascript",
+                "bot",
+                "scraper",
+                "metacritic"
+            ],
+            ""
+        ],
+        [
+            "scrap_retroachievements",
+            "Bot scraper for retroachievements",
+            3,
+            "https://github.com/ulyssear/scrap_retroachievements",
+            [
+                "puppeteer",
+                "nodejs",
+                "javascript",
+                "bot",
+                "scraper",
+                "retroachievements"
+            ],
+            ""
+        ],
+
+        [
+            "Asteroid",
+            "Remake of Asteroid using javascript",
+            4,
+            "https://github.com/ulyssear/Asteroid",
+            [
+                "javascript",
+                "html",
+                "nodejs",
+                "game"
+            ],
+            ""
+        ],
+        [
+            "typing-game",
+            "Simple typing game built with javascript",
+            4,
+            "https://github.com/ulyssear/typing-game",
+            [
+                "javascript",
+                "html",
+                "game"
+            ],
+            ""
+        ]
+    ]
+}

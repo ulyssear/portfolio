@@ -1,0 +1,19 @@
+{
+    "avatar": "assets/img/avatar.webp",
+    "cover": "",
+    "cv": "https://github.com/ulyssear/cv.arnaud.tech/raw/master/CV-20230221.pdf",
+    "job": "Fullstack Developer",
+    "socials": [
+        ["name","logo","url"],
+        [
+            "linkedin",
+            "assets/img/social-linkedin.svg",
+            "https://fr.linkedin.com/in/ulysse-arnaud"
+        ],
+        [
+            "github",
+            "assets/img/social-github.svg",
+            "https://github.com/ulyssear"
+        ]
+    ]
+}
