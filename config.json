@@ -7,7 +7,10 @@
             "node_modules",
             "*.json",
             "*.md",
-            "assets"
+            "assets",
+            "CNAME",
+            "LICENSE",
+            ".gitignore"
         ]
     }
 }

@@ -7,3 +7,10 @@ Name       Size    Checksum
 ----       ----    --------
 index.html 0,32 MB 3EA9034370A7C31FC29BF66AF99D2636D806B9C2C14040C97A01658973B095F5
 </pre>
+
+```bash
+find ./build -type f -exec sha256sum {} \; | sort
+```
+
+<pre style="font-size:64%;color:white;background:black">
+</pre>

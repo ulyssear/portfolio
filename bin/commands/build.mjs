@@ -59,34 +59,26 @@ function execute(options) {
       const end_date = new Date();
       const time_diff = end_date.getTime() - start_date.getTime();
       console.log(`Build finished in ${time_diff} ms.`);
-      const index_html_file = path.join(output_dir, "index.html");
-      const index_html_file_size = fs.statSync(index_html_file).size;
-      const index_html_file_size_mb =
-        index_html_file_size > 1024 * 1024
-          ? (index_html_file_size / (1024 * 1024)).toFixed(2) + " MB"
-          : index_html_file_size > 1024
-          ? (index_html_file_size / 1024).toFixed(2) + " KB"
-          : index_html_file_size + " B";
-      console.log(`File size of index.html: ${index_html_file_size_mb}`);
-      const index_html_file_content = fs.readFileSync(index_html_file);
-      const index_html_file_content_gzip = zlib.gzipSync(
-        index_html_file_content
-      );
-      fs.writeFileSync(
-        path.join(output_dir, "index.html.gz"),
-        index_html_file_content_gzip
-      );
-      const index_html_file_gzip = path.join(output_dir, "index.html.gz");
-      const index_html_file_gzip_size = fs.statSync(index_html_file_gzip).size;
-      const index_html_file_gzip_size_mb =
-        index_html_file_gzip_size > 1024 * 1024
-          ? (index_html_file_gzip_size / (1024 * 1024)).toFixed(2) + " MB"
-          : index_html_file_gzip_size > 1024
-          ? (index_html_file_gzip_size / 1024).toFixed(2) + " KB"
-          : index_html_file_gzip_size + " B";
-      console.log(
-        `File size of index.html.gz: ${index_html_file_gzip_size_mb}`
-      );
+      const index_html_file = path.join(output_dir, "../index.html");
+      const index_html_file_gz = path.join(output_dir, "index.html.gz");
+      const index_html_file_min = path.join(output_dir, "index.html");
+      
+      const sizes = {
+        original: fs.statSync(index_html_file).size,
+        minified: fs.statSync(index_html_file_min).size,
+        gzipped: fs.statSync(index_html_file_gz).size,
+      };
+      
+      const sizes_text = {
+        original: human_size(sizes.original),
+        minified: human_size(sizes.minified),
+        gzipped: human_size(sizes.gzipped) + " (" + ((sizes.gzipped / sizes.minified) * 100).toFixed(2) + "%)",
+      };
+
+      console.log();
+      console.log("Original size: " + sizes_text.original);
+      console.log("Minified size: " + sizes_text.minified);
+      console.log("Gzipped size: " + sizes_text.gzipped);
     });
 
     if (options.includes("--watch")) {
@@ -108,6 +100,16 @@ function execute(options) {
       });
     }
   }
+}
+
+function human_size(size) {
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let unit_index = 0;
+  while (size > 1024) {
+    size /= 1024;
+    unit_index++;
+  }
+  return size.toFixed(2) + " " + units[unit_index];
 }
 
 async function build_file(file) {

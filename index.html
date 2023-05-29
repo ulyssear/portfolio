@@ -504,7 +504,9 @@
 <body
     class="height-[100%] display-[grid] place-content-[center] font-family-[Poppins, sans-serif] background-[var(--color-light)] color-[var(--color-dark)] overflow-[hidden]">
     <main
-        class="width-[96vw] height-[100vh] display-[grid] place-items-[center] position-[relative] --background-[var(--color-dark)] --color-[var(--color-light)]">
+        class="width-[96vw] height-[100vh] display-[grid] place-items-[center] position-[relative] --background-[var(--color-dark)] --color-[var(--color-light)]
+        font-size-[clamp(.8rem, 1.2vw, 1.5rem)]
+        ">
         <!-- Card -->
         <aside  
             class="position-[absolute] background-[var(--background)] color-[var(--color)] height-[90%] width-[35%] left-[8%] z-index-[2] border-radius-[.7rem] display-[grid] grid-template-columns-[1fr] gap-[0] place-content-[start] place-items-[start] overflow-[hidden] grid-template-rows-[auto 1fr] box-shadow-[0 8px 32px 0 #0003] backdrop-filter-[blur( 8px )] -webkit-backdrop-filter-[blur( 8px )] transition-[all .3s ease-in-out] 
@@ -526,8 +528,10 @@
                         class="display-[grid] grid-template-rows-[1fr auto] place-items-[start] row-gap-[var(--gap)] z-index-[3] width-[100%] height-[100%]
                         [> section]:{width-[100%]}">
                         <section class="padding-[1rem 1rem .1rem] display-[grid] grid-template-columns-[1fr] justify-content-[space-between] place-items-[center] row-gap-[1rem]">
-                            <h1 class="font-size-[min(5vw, 2rem)] text-align-[center]">Ulysse ARNAUD</h1>
-                            <p>Job</p>
+                            <h1 class="font-size-[clamp(.5rem, 3vw, 2rem)] text-align-[center] letter-spacing-[-.03rem]">Ulysse ARNAUD</h1>
+                            <p class="
+                            font-size-[clamp(.4rem, 3vw, 1rem)] text-align-[center] font-weight-[300] text-transform-[uppercase] letter-spacing-[-.02rem]
+                            ">Job</p>
                             <!-- Social links -->
                             <ul class="
                             display-[flex] gap-[1rem] --color-[var(--color-primary)] list-style-[none] height-[2rem] width-[100%] justify-content-[center]
@@ -633,11 +637,15 @@
 
             <!-- Main section -->
             <section
-                class="--background-[rgba(var(--color-dark-rgb),.9] overflow-[hidden] background-[var(--background)] color-[var(--color)] width-[100%] height-[100%] position-[relative] border-radius-[.5rem] box-shadow-[0 8px 32px 0 #0003] backdrop-filter-[blur( 8px )] -webkit-backdrop-filter-[blur( 8px )] transition-[all .3s ease-in-out] [> section]:{display-[none] height-[100%] width-[100%] position-[absolute] right-[0] place-content-[start] overflow-[auto] grid-template-columns-[1fr] scrollbar-color-[var(--color) var(--background)] scrollbar-width-[thin]}
+                class="--background-[rgba(var(--color-dark-rgb),.9] overflow-[hidden] background-[var(--background)] color-[var(--color)] width-[100%] height-[100%] position-[relative] border-radius-[.5rem] box-shadow-[0 8px 32px 0 #0003] backdrop-filter-[blur( 8px )] -webkit-backdrop-filter-[blur( 8px )] transition-[all .3s ease-in-out]
+                [> section]:{display-[none] height-[100%] width-[100%] position-[absolute] right-[0] place-content-[start] overflow-[auto] grid-template-columns-[1fr] scrollbar-color-[var(--color) var(--background)] scrollbar-width-[thin]}
                 [> section > section]:{display-[grid] grid-template-rows-[auto 1fr] padding-bottom-[1rem]}
                 [> section > section > header]:{border-bottom-[1px solid #FFF6] padding-[2% 4%]}
                 [> section > section > section]:{display-[grid] row-gap-[1rem] grid-template-columns-[1fr] width-[92%] margin-[auto]}
-                [> section > section > section > section]:{width-[100%]}">
+                [> section > section > section > section]:{width-[100%]}
+                [h2]:{font-size-[clamp(1rem,1.5vw,2rem)] font-weight-[bold] text-transform-[uppercase]}
+                [h3]:{font-size-[clamp(.8rem,1.25vw,1.5rem)] font-weight-[bold] text-transform-[uppercase]}
+                ">
                 <!-- About -->
                 <section data-name="about" class="display-[grid]">
                     <!-- About me -->
@@ -651,7 +659,8 @@
                                 <span></span>
                             </p>
                             <ul
-                                class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(16rem,1fr)] row-gap-[.5rem] column-gap-[1rem] list-style-[none] [> li]:{display-[grid] grid-template-columns-[repeat(2,auto)] place-content-[start] column-gap-[1rem]}">
+                                class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(16rem,1fr)] row-gap-[.5rem] column-gap-[1rem] list-style-[none]
+                                [> li]:{display-[grid] grid-template-columns-[repeat(2,auto)] place-content-[start] column-gap-[1rem]}">
                                 <li>
                                     <span>Age :</span>
                                     <span></span>
@@ -696,7 +705,16 @@
                 </section>
 
                 <!-- Resume -->
-                <section data-name="resume">
+                <section data-name="resume" class="
+                [section]:{position-[relative]}
+                [section > header]:{display-[grid] grid-template-columns-[auto 1fr] column-gap-[1rem] align-items-[center] position-[relative] padding-[2% 4%]}
+                [section > header > h3]:{text-transform-[uppercase]}
+                [section > header > h3 + div]:{height-[1px] width-[100%] background-image-[linear-gradient(to right, #FFF6, transparent)] width-[100%] user-select-[none] pointer-events-[none] position-[absolute] left-[0] bottom-[0]}
+                [section > header > figure]:{width-[clamp(2rem,2vw,3rem)] aspect-ratio-[1/1] border-radius-[50%] overflow-[hidden] padding-[10%] border-[1px solid #FFF5]}
+                [section > header > figure > picture]:{height-[100%] width-[100%] border-radius-[50%] overflow-[hidden] display-[grid] place-items-[center]}
+                [section > header > figure > picture > img]:{height-[auto] width-[100%] object-fit-[contain] object-position-[center]}
+                [section > div]:{position-[absolute] width-[1px] height-[100%] background-image-[linear-gradient(to bottom, #FFF6, transparent)] position-[absolute] left-[50%] transform-[translateX(-50%)]}
+                ">
                     <!-- Resume -->
                     <section>
                         <!-- Header -->
@@ -706,13 +724,6 @@
                         <!-- Section -->
                         <section
                             class="display-[grid] grid-template-columns-[repeat(2, 1fr] row-gap-[1rem] column-gap-[0rem] position-[relative]
-                            [> div]:{user-select-[none] pointer-events-[none] height-[100%] width-[1px] background-image-[linear-gradient(to bottom, #FFFA, transparent)] position-[absolute] left-[50%] top-[0] transform-[translateX(-50%)]}
-                            [> section]:{position-[relative]}
-                            [> section > header]:{display-[grid] grid-template-columns-[auto 1fr] column-gap-[1rem] align-items-[center] position-[relative] padding-[2% 4%]}
-                            [> section > header > figure]:{aspect-ratio-[1/1] border-radius-[50%] overflow-[hidden] height-[3rem] width-[auto] padding-[10%] border-[1px solid #FFF5]}
-                            [> section > header > figure > picture]:{height-[100%] width-[100%] border-radius-[50%] overflow-[hidden] display-[grid] place-items-[center]}
-                            [> section > header > h3]:{text-transform-[uppercase]}
-                            [> section > header > h3 + div]:{height-[1px] width-[100%] background-image-[linear-gradient(to right, #FFF6, transparent)] width-[100%] user-select-[none] pointer-events-[none] position-[absolute] left-[0] bottom-[0]}
                             [> section:first-of-type > section]:{padding-inline-end-[1rem]}
                             [> section:last-of-type > section]:{padding-inline-start-[1rem]}
                             ">
@@ -804,14 +815,6 @@
                     <!-- Skills -->
                     <section class="
                         [> section]:{display-[grid] column-gap-[0] padding-block-[0] position-[relative] justify-content-[space-between] font-size-[80%]}
-                        [> section > section]:{position-[relative]}
-                        [> section > div]:{user-select-[none] pointer-events-[none] height-[100%] width-[1px] background-image-[linear-gradient(to bottom, #FFF6, transparent)] position-[absolute] left-[50%] top-[0] transform-[translateX(-50%)]}
-                        [> section header]:{padding-block-[.5rem] padding-inline-[1rem] display-[grid] grid-template-columns-[auto 1fr] column-gap-[1rem] align-items-[center] position-[relative]}
-                        [> section header > figure]:{aspect-ratio-[1/1] border-radius-[50%] overflow-[hidden] height-[3rem] width-[auto] padding-[.25rem] border-[1px solid #FFF5]}
-                        [> section header > figure > picture]:{height-[100%] width-[100%] border-radius-[50%] overflow-[hidden] display-[grid] place-items-[center]}
-                        [> section header > figure > picture > img]:{height-[auto] width-[100%] object-fit-[contain] object-position-[center]}
-                        [> section header > h3]:{text-transform-[uppercase]}
-                        [> section header > h3 + div]:{height-[1px] width-[100%] background-image-[linear-gradient(to right, #FFF6, transparent)] width-[100%] user-select-[none] pointer-events-[none] position-[absolute] left-[0] bottom-[0]}
                         [> section > section > section > section]:{padding-block-[.64rem] padding-inline-[1rem] display-[grid] grid-template-columns-[repeat(auto-fill, minmax(4rem,1fr)] column-gap-[.8rem] row-gap-[.8rem] place-items-[center] place-content-[center]}
                         [> section > section > section > article]:{display-[grid] grid-template-columns-[1fr] column-gap-[1rem] place-items-[center] width-[100%]}">
                         <!-- Header -->
@@ -824,7 +827,6 @@
                             grid-template-columns-[repeat(2,1fr)] place-items-[start]
                             [> section]:{display-[grid] grid-template-columns-[1fr] width-[100%]}
                             [> section > section]:{display-[grid] grid-template-columns-[1fr] width-[100%]}
-                            [> section > section > header]:{width-[100%]}
                             [> section > section > section]:{display-[grid] grid-template-columns-[repeat(auto-fill, minmax(4rem, 1fr))] row-gap-[1rem] column-gap-[.3rem] width-[100%]}
                             ">
                             <div>&nbsp;</div>
@@ -968,7 +970,7 @@
                             <section class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(clamp(7rem,7vmax,10rem), 1fr))] width-[100%]">
                                 <template id="programming-language">
                                     <article class="
-                                    display-[grid] row-gap-[0] place-items-[center] place-content-[center] grid-template-rows-[1fr 1fr] height-[100%] aspect-ratio-[1/1.6] overflow-[hidden]
+                                    display-[grid] row-gap-[0] place-items-[center] place-content-[center] grid-template-rows-[1fr 1fr] height-[100%] overflow-[hidden]
                                     [header,h4,p,figure,picture]:{padding-[0] margin-[0]}
                                     [> figure]:{display-[grid] row-gap-[0] place-items-[center] aspect-ratio-[1/1] width-[inherit] height-[100%] overflow-[hidden]}
                                     [> figure > picture]:{width-[100%] height-[inherit] object-fit-[contain] object-position-[center] display-[grid] justify-items-[center] align-items-[start]}
@@ -995,12 +997,12 @@
                         <header class="display-[flex] align-items-[center] justify-content-[space-between]  column-gap-[1rem] overflow-[hidden]">
                             <h2>Works</h2>
                             <nav class="overflow-[auto]">
-                                <ul class="display-[grid] column-gap-[1rem]"></ul>
+                                <ul class="display-[grid] column-gap-[1rem] font-size-[clamp(.6rem,2vw,1rem)] height-[100%] grid-template-rows-[1fr]"></ul>
                             </nav>
                         </header>
 
                         <section
-                            class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(9rem, 1fr))] place-content-[space-between] column-gap-[1rem] row-gap-[1rem] padding-block-[1rem] font-size-[80%]">
+                            class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(10rem, 1fr))] place-content-[space-between] column-gap-[1rem] row-gap-[1rem] padding-block-[1rem] font-size-[80%]">
                             <template id="work">
                                 <a target="_blank" class="[current,figure,h3,picture]:{padding-[0] margin-[0]}">
                                     <figure>
