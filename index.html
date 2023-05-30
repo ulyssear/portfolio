@@ -463,13 +463,13 @@
                 img_avatar.src = avatar;
                 img_avatar.alt = '';
                 img_avatar.loading = 'lazy';
-                img_avatar.className += ' height-[100%] width-[auto] object-fit-[contain] object-position-[center]';
+                img_avatar.className += ' height-[100%] width-[100%] object-fit-[cover] object-position-[center]';
                 elements.avatar.appendChild(img_avatar);
                 const img_cover = document.createElement('img');
                 img_cover.src = cover;
                 img_cover.alt = '';
                 img_cover.loading = 'lazy';
-                img_cover.className += ' height-[100%] width-[auto] object-fit-[contain] object-position-[center]';
+                img_cover.className += ' height-[100%] width-[100%] object-fit-[cover] object-position-[center]';
                 elements.cover.appendChild(img_cover);
             }
 
