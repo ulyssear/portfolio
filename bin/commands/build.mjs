@@ -395,6 +395,7 @@ function minify_js(content) {
     const file_content_minified = minify_json(file_content);
     content = content.replace(require, file_content_minified);
   }
+  /*
   const function_regex = /function\s+([\w\$]+)/g;
   const functions = content.match(new RegExp(function_regex, "g")) || [];
   const dict_functions = {};
@@ -462,6 +463,7 @@ function minify_js(content) {
       dict_functions[func_name] = compact_name;
     }
   }
+  */
   content = content.replace(/\n/g, "");
   content = content.replace(/\s+/g, " ");
   return content;
