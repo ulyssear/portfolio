@@ -36,6 +36,18 @@
                 display: none!important;
             }
         }
+        
+        @media screen and (max-width:800px) {
+            /* main {
+                width: 200vw!important;
+            }
+            main > aside {
+                width: 80vw!important;
+            }
+            main > section {
+                grid-template-columns: .15fr repeat(2, 1fr)!important;
+            } */
+        }
     </style>
 
     <script>
@@ -502,7 +514,7 @@
 </head>
 
 <body
-    class="height-[100%] display-[grid] place-content-[center] font-family-[Poppins, sans-serif] background-[var(--color-light)] color-[var(--color-dark)] overflow-[hidden]">
+    class="height-[100%] display-[grid] place-items-[center] font-family-[Poppins, sans-serif] background-[var(--color-light)] color-[var(--color-dark)] overflow-[hidden] position-[relative]">
     <main
         class="width-[96vw] height-[100vh] display-[grid] place-items-[center] position-[relative] --background-[var(--color-dark)] --color-[var(--color-light)]
         font-size-[clamp(.8rem, 1.2vw, 1.5rem)]
@@ -541,7 +553,7 @@
                                     overflow-[hidden] border-radius-[50%] aspect-ratio-[1/1]
                                     [current, a, picture]:{margin-[0] padding-[0]}
                                     ">
-                                        <a href="#" target="_blank">
+                                        <a href target="_blank">
                                             <picture></picture>
                                         </a>
                                     </li>
@@ -575,10 +587,10 @@
             [button]:{width-[100%] height-[100%] padding-[1rem] background-[transparent] border-[none] color-[inherit] font-weight-[bold] text-transform-[uppercase] font-size-[100%]}
             ">
                 <ul
-                    class="display-[grid] grid-template-columns-[1fr] list-style-[none] place-content-[space-between] gap-[.6rem] width-[100%]
+                    class="display-[grid] grid-template-columns-[1fr] list-style-[none] justify-content-[space-between] gap-[.6rem] width-[100%]
                     [li]:{aspect-ratio-[1/1] place-content-[center] border-radius-[.6rem] background-[var(--background)] color-[var(--color)] display-[grid] padding-[0] grid-template-columns-[1fr] grid-template-rows-[1fr] overflow-[hidden] box-shadow-[0 8px 32px 0 #0003] backdrop-filter-[blur( 8px )] -webkit-backdrop-filter-[blur( 8px )] transition-[all .3s ease-in-out]}
-                    [a]:{color-[inherit] text-decoration-[none] height-[100%] display-[block] display-[grid] place-content-[center] place-items-[center] text-transform-[uppercase] font-size-[clamp(.1rem,.85vw,2rem)] padding-[0] row-gap-[0] font-weight-[bold]}
-                    [picture]:{width-[clamp(0.2rem,1vw,3rem] height-[auto] display-[block] place-self-[center] place-items-[center] place-content-[center]}
+                    [a]:{color-[inherit] text-decoration-[none] height-[100%] display-[block] display-[grid] place-content-[center] place-items-[center] text-transform-[uppercase] font-size-[clamp(.3rem,.85vw,2rem)] padding-[0] row-gap-[0] font-weight-[bold]}
+                    [picture]:{width-[clamp(.7rem,1vw,3rem] height-[auto] display-[block] place-self-[center] place-items-[center] place-content-[center]}
                     [picture > img]:{width-[100%] height-[auto]}
                     ">
                     <li>
@@ -967,7 +979,7 @@
                                 <div>&nbsp;</div>
                             </header>
                             <!-- Section -->
-                            <section class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(clamp(7rem,7vmax,10rem), 1fr))] width-[100%]">
+                            <section class="display-[grid] grid-template-columns-[repeat(auto-fill, minmax(clamp(4rem,7vmax,10rem), 1fr))] gap-[.3rem] width-[100%]">
                                 <template id="programming-language">
                                     <article class="
                                     display-[grid] row-gap-[0] place-items-[center] place-content-[center] grid-template-rows-[1fr 1fr] height-[100%] overflow-[hidden]
